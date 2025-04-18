@@ -8,6 +8,8 @@ export async function POST(req: NextRequest){
 
     const { sessionClaims } = await auth();
     const { room } = await req.json();
+    console.log("🔐 Authenticated as:", sessionClaims?.email);
+    console.log("📄 Requesting access to room:", room);
 
     const session = liveblocks.prepareSession(sessionClaims?.email!, {
         userInfo:{
@@ -22,16 +24,23 @@ export async function POST(req: NextRequest){
     .where("userId", "==" , sessionClaims?.email)
     .get();
 
+    console.log("📁 Rooms found for user:", usersInRoom.docs.map(doc => doc.id));
 
-    const userInRoom = usersInRoom.docs.find((doc) => doc.id === room);
+    const userInRoom = usersInRoom.docs.find((doc) =>{
+        const docData = doc.data();
+        console.log("🧾 Checking doc data:", doc.id, docData);
+        return docData.roomId === room;
+    });
 
     if (userInRoom?.exists){
+        console.log("✅ User is in room. Granting access.");
         session.allow(room,session.FULL_ACCESS);
         const { body, status } = await session.authorize();
         console.log("you are authorised");
         
         return new Response(body, { status });
     } else{
+        console.warn("❌ User is NOT in the room. Access denied.");
         return NextResponse.json (
             { message: "you are not in this room"},
             { status: 403 }

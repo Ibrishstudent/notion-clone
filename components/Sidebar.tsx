@@ -35,7 +35,7 @@ function Sidebar() {
         editor: [],
     });
 
-    const [data, loading, error] = useCollection (
+    const [ data ] = useCollection (
         user &&
             query(
                 collectionGroup(db,"rooms"),
@@ -111,7 +111,7 @@ function Sidebar() {
                         shared with Me
                     </h2>
                     {groupedData.editor.map((doc) => (
-                        <SidebarOption key={doc.id} id={doc.id} href={'/doc/${doc.id}'}/>
+                        <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`}/>
                     ))}
                 </>
             )}           

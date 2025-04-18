@@ -54,7 +54,7 @@ function TranslateDocument( { doc }: { doc: Y.Doc }) {
     const [isOpen, setIsOpen] = useState(false);
     const [language, setLanguage] = useState<string>("");
     const [summary, setSummary] = useState("");
-    const[question, setQuestion] = useState("");
+    const[ question ] = useState("");
     const [isPending, startTransition] = useTransition();
     const data = doc.get("document-store").toJSON();
     console.log(data);

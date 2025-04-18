@@ -9,13 +9,10 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { FormEvent, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { deletedDocument, inviteUserToDocument, removeUserFromDocument } from "@/actions/actions";
+import {  removeUserFromDocument } from "@/actions/actions";
 import { toast } from "sonner";
-import { Input } from "./ui/input";
 import { useUser } from "@clerk/nextjs";
 import useOwner from "@/lib/useOwner";
 import { useRoom } from "@liveblocks/react/suspense";

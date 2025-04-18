@@ -63,9 +63,7 @@ export async function deletedDocument (roomId: string){
 
 export async function inviteUserToDocument(roomId: string, email:string) {
 
-    console.log("invited user");
     auth.protect();
-    console.log("user Authenticated");
 
     console.log("inviteUserToDocument", roomId, email);
 
