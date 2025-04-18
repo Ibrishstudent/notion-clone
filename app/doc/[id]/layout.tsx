@@ -16,4 +16,4 @@ function DocLayout ({
   return <RoomProvider roomId={id}> {children} </RoomProvider>;
 }
 
-export default DocLayout; 
+export default DocLayout;
