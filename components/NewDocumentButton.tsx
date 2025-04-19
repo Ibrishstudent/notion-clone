@@ -1,8 +1,7 @@
 "use client";
 
-import { handleClientScriptLoad } from "next/script";
 import { Button } from "./ui/button";
-import { startTransition, useTransition } from "react";
+import {  useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CreateNewDocument } from "@/actions/actions";
 

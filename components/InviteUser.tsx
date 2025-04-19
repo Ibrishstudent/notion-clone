@@ -10,7 +10,6 @@ import {
 import { FormEvent, useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import { inviteUserToDocument } from "@/actions/actions";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
