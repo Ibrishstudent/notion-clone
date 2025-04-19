@@ -11,13 +11,17 @@ export async function POST(req: NextRequest){
     console.log("🔐 Authenticated as:", sessionClaims?.email);
     console.log("📄 Requesting access to room:", room);
 
-    const session = liveblocks.prepareSession(sessionClaims?.email!, {
+    if (!sessionClaims?.email || !sessionClaims?.fullName || !sessionClaims?.image) {
+        return NextResponse.json({ message: "Unauthorized - missing session details" }, { status: 401 });
+      }
+      
+      const session = liveblocks.prepareSession(sessionClaims.email, {
         userInfo:{
-            name: sessionClaims?.fullName!,
-            email: sessionClaims?.email!,
-            avatar: sessionClaims?.image!,
+          name: sessionClaims.fullName,
+          email: sessionClaims.email,
+          avatar: sessionClaims.image,
         },
-    });
+      });
 
     const usersInRoom = await adminDb
     .collectionGroup("rooms")
